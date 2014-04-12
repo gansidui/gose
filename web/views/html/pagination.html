@@ -1,0 +1,24 @@
+{{define "pagination"}}
+	<ul>
+		{{if .HasPrevPage}}
+			<a href="?word={{.Word}}&page={{.PrevPage}}">Previous</a>
+		{{else}}
+			<a href="#">Previous</a>
+		{{end}}
+
+		{{with .ShowPages}}
+		{{range .}}
+			<a href="?word={{.Word}}&page={{.Page}}">{{.Page}}</a>
+		{{end}}
+		{{end}}
+
+		{{if .HasNextPage}}
+			<a href="?word={{.Word}}&page={{.NextPage}}">Next</a>
+		{{else}}
+			<a href="#">Next</a>
+		{{end}}
+
+		(Total:{{.PageTotal}})
+
+	</ul>
+{{end}}

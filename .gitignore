@@ -1,0 +1,4 @@
+*.log
+*.exe
+*.db
+sqliteadmin/

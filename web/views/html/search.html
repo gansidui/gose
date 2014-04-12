@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Gopher Search</title>
+	</head>
+	<body>
+		<form method="post">
+			
+			{{with .Pagination}}
+			<input id="word" name="word" value="{{.Word}}" />
+			{{end}}
+			
+			<input type="submit" value="Gopher Search" />
+
+			<p>Used:{{.UsedTime}} Total:{{.ResultTotal}}</p>
+
+		</form>
+		
+		{{with .Articles}}
+		{{range .}}
+			<hr>
+			<h3><a href="file:///{{.Path}}">{{.Title}}</a></h3>
+			<h5><a href="{{.Url}}">{{.Url}}</a></h5>
+			<p>{{.Summary}}</p>
+		{{end}}
+		{{end}}
+
+		{{template "pagination" .Pagination}}
+
+	</body>
+</html>
