@@ -1,19 +1,22 @@
+// 采用了double array trie
+// 可以随时替换成 trie
+
 package participle
 
 import (
-	"github.com/gansidui/gose/indexing/participleutil/trie"
+	"github.com/gansidui/gose/indexing/participleutil/datrie"
 )
 
 type Participle struct {
-	forwardTrie  *trie.Trie
-	backwardTrie *trie.Trie
+	forwardTrie  *datrie.DATrie
+	backwardTrie *datrie.DATrie
 }
 
-// 正向最大匹配构造一个trie即可，逆向最大匹配刚好相反，在插入前先反转，查询的时候也先反转再查询
+// 正向最大匹配构造一个datrie即可，逆向最大匹配刚好相反，在插入前先反转，查询的时候也先反转再查询
 func NewParticiple() *Participle {
 	p := new(Participle)
-	p.forwardTrie = trie.NewTrie()
-	p.backwardTrie = trie.NewTrie()
+	p.forwardTrie = datrie.NewDATrie()
+	p.backwardTrie = datrie.NewDATrie()
 	return p
 }
 

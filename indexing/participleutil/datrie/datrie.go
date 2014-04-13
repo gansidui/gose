@@ -1,37 +1,48 @@
-package trie
+// double array trie
+// base(s) + c --> t
+
+package datrie
 
 type trieNode struct {
-	child map[rune]*trieNode
-	flag  bool
+	c    rune
+	flag bool
 }
 
 func newTrieNode() *trieNode {
 	return &trieNode{
-		child: make(map[rune]*trieNode),
-		flag:  false,
+		c:    0,
+		flag: false,
 	}
 }
 
-type Trie struct {
+type pair struct {
+	s *trieNode
+	c rune
+}
+
+type DATrie struct {
 	root *trieNode
+	darr map[pair]*trieNode
 	num  int
 }
 
-func NewTrie() *Trie {
-	return &Trie{
+func NewDATrie() *DATrie {
+	return &DATrie{
 		root: newTrieNode(),
+		darr: make(map[pair]*trieNode),
 		num:  0,
 	}
 }
 
-func (this *Trie) Insert(src string) {
+func (this *DATrie) Insert(src string) {
 	curNode := this.root
 	for _, v := range src {
-		if curNode.child[v] == nil {
+		p := pair{s: curNode, c: v}
+		if this.darr[p] == nil {
 			newNode := newTrieNode()
-			curNode.child[v] = newNode
+			this.darr[p] = newNode
 		}
-		curNode = curNode.child[v]
+		curNode = this.darr[p]
 	}
 	curNode.flag = true
 	this.num++
@@ -39,7 +50,7 @@ func (this *Trie) Insert(src string) {
 
 // 若不存在src,则flag为false，且preWordLastIndex保存该路径上离失配地点最近的一个词的最后一个rune的末位置
 // 若存在src,则flag为true，且应该忽视preWordLastIndex
-func (this *Trie) Find(src string) (flag bool, preWordLastIndex int) {
+func (this *DATrie) Find(src string) (flag bool, preWordLastIndex int) {
 	curNode := this.root
 	ff := false
 	for k, v := range src {
@@ -47,10 +58,11 @@ func (this *Trie) Find(src string) (flag bool, preWordLastIndex int) {
 			preWordLastIndex = k
 			ff = false
 		}
-		if curNode.child[v] == nil {
+		p := pair{s: curNode, c: v}
+		if this.darr[p] == nil {
 			return false, preWordLastIndex
 		}
-		curNode = curNode.child[v]
+		curNode = this.darr[p]
 		if curNode.flag {
 			ff = true
 		}
@@ -58,12 +70,12 @@ func (this *Trie) Find(src string) (flag bool, preWordLastIndex int) {
 	return curNode.flag, preWordLastIndex
 }
 
-func (this *Trie) Num() int {
+func (this *DATrie) Num() int {
 	return this.num
 }
 
 // 正向最大匹配分词，按照词典将src分词，分词结果以[]string形式返回
-func (this *Trie) Participle(src string) (target []string) {
+func (this *DATrie) Participle(src string) (target []string) {
 	if len(src) == 0 {
 		return
 	}
