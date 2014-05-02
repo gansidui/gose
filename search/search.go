@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/gansidui/gose/indexing/participleutil"
 	_ "github.com/mattn/go-sqlite3"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"sort"
@@ -41,10 +42,10 @@ type SearchResultInfo struct {
 
 // 文章信息
 type ArticleInfo struct {
-	Title   string // 标题
-	Summary string // 摘要
-	Url     string // 原始url
-	Path    string // 本地路径
+	Title   template.HTML // 标题
+	Summary template.HTML // 摘要
+	Url     string        // 原始url
+	Path    string        // 本地路径
 }
 
 // word --> []*WordIndexInfo 按 id 从小到大排序，便于二分查找
@@ -60,6 +61,13 @@ type ByTfIdfs []*SearchResultInfo
 func (a ByTfIdfs) Len() int           { return len(a) }
 func (a ByTfIdfs) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByTfIdfs) Less(i, j int) bool { return a[i].tfidfs > a[j].tfidfs }
+
+// 按字符串长度从大到小排序
+type ByLength []string
+
+func (a ByLength) Len() int           { return len(a) }
+func (a ByLength) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByLength) Less(i, j int) bool { return len(a[i]) > len(a[j]) }
 
 var conf *Config                                 // 配置
 var wordMapIndexInfo map[string][]*WordIndexInfo // word --> []*WordIndexInfo
@@ -326,10 +334,24 @@ func search(searchString string, start, end int) (result []int, total int) {
 	return result, total
 }
 
+// 将关键词标红
+func markRedKeywords(content string, keywords []string) (result string) {
+	patterns := []string{}
+	sort.Sort(ByLength(keywords))
+	for _, oldstr := range keywords {
+		patterns = append(patterns, oldstr)
+		newstr := "<font color=\"red\">" + oldstr + "</font>"
+		patterns = append(patterns, newstr)
+	}
+	replacer := strings.NewReplacer(patterns...)
+	result = replacer.Replace(content)
+	return result
+}
+
 // 向调用者返回搜索结果
 // searchString为搜索串，返回第[start, end]篇文档的信息，result保存文档信息, total为搜索到的文档总数
 func GetSearchResult(searchString string, start, end int) (result []ArticleInfo, total int) {
-	// 定义一个提取摘要的函数, 提取前50个rune
+	// 定义一个提取摘要的函数, 提取前100个rune
 	getSummary := func(content string) string {
 		num := 0
 		var res string
@@ -346,6 +368,9 @@ func GetSearchResult(searchString string, start, end int) (result []ArticleInfo,
 		return res
 	}
 
+	// 得到分词用来结果标红
+	keywords := participleutil.Participle(searchString)
+
 	res, tot := search(searchString, start, end)
 	total = tot
 	var articleInfo ArticleInfo
@@ -360,14 +385,14 @@ func GetSearchResult(searchString string, start, end int) (result []ArticleInfo,
 		if err != nil {
 			log.Printf("%v\r\n", err)
 		} else {
-			articleInfo.Summary = getSummary(string(content))
+			articleInfo.Summary = template.HTML(markRedKeywords(getSummary(string(content)), keywords))
 		}
 
 		title, err := ioutil.ReadFile(conf.ExtractWebpagePath + md5 + "_title.txt")
 		if err != nil {
 			log.Printf("%v\r\n", err)
 		} else {
-			articleInfo.Title = string(title)
+			articleInfo.Title = template.HTML(markRedKeywords(string(title), keywords))
 		}
 
 		result = append(result, articleInfo)
