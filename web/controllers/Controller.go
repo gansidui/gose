@@ -11,11 +11,11 @@ import (
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		r.ParseForm()
-		word := r.Form.Get("word")
-		if word == "" {
+		q := r.Form.Get("q")
+		if q == "" {
 			utils.RespondTemplate(w, http.StatusOK, "views/html/index.html", nil)
 		} else {
-			s := "/search?word=" + word + "&page=1"
+			s := "/search?q=" + q + "&start=0"
 			http.Redirect(w, r, s, 303)
 		}
 	} else {
@@ -26,13 +26,14 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 func SearchPage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		r.ParseForm()
-		word := r.Form.Get("word")
-		s := "/search?word=" + word + "&page=1"
+		q := r.Form.Get("q")
+		s := "/search?q=" + q + "&start=0"
 		http.Redirect(w, r, s, 303)
 	} else {
-		word := r.URL.Query().Get("word")
-		page := r.URL.Query().Get("page")
-		resultPage, success := dao.GetResultPageInfo(word, page)
+		q := r.URL.Query().Get("q")
+		start := r.URL.Query().Get("start")
+		num := "10"
+		resultPage, success := dao.GetResultPageInfo(q, start, num)
 		if success {
 			w.WriteHeader(http.StatusOK)
 			t, err := template.ParseFiles("views/html/search.html", "views/html/pagination.html")

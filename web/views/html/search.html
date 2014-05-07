@@ -6,7 +6,7 @@
 		<form method="post">
 			
 			{{with .Pagination}}
-			<input id="word" name="word" value="{{.Word}}" />
+			<input id="q" name="q" value="{{.QueryString}}" />
 			{{end}}
 			
 			<input type="submit" value="Gopher Search" />

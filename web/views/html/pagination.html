@@ -1,19 +1,19 @@
 {{define "pagination"}}
 	<ul>
 		{{if .HasPrevPage}}
-			<a href="?word={{.Word}}&page={{.PrevPage}}">Previous</a>
+			<a href="?q={{.QueryString}}&start={{.PrevPageStart}}">Previous</a>
 		{{else}}
 			<a href="#">Previous</a>
 		{{end}}
 
 		{{with .ShowPages}}
 		{{range .}}
-			<a href="?word={{.Word}}&page={{.Page}}">{{.Page}}</a>
+			<a href="?q={{.QueryString}}&start={{.Start}}">{{.Page}}</a>
 		{{end}}
 		{{end}}
 
 		{{if .HasNextPage}}
-			<a href="?word={{.Word}}&page={{.NextPage}}">Next</a>
+			<a href="?q={{.QueryString}}&start={{.NextPageStart}}">Next</a>
 		{{else}}
 			<a href="#">Next</a>
 		{{end}}
