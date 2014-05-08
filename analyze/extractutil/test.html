@@ -1,295 +1,544 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0062)http://www.cnblogs.com/fancing/archive/2012/04/14/2446798.html -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" type="text/javascript" src="./网页正文提取的思路 - fancing - 博客园_files/gpt.js"></script>
-
-<title>网页正文提取的思路 - fancing - 博客园</title>
-<link type="text/css" rel="stylesheet" href="./网页正文提取的思路 - fancing - 博客园_files/blog-common.css">
-<link id="MainCss" type="text/css" rel="stylesheet" href="./网页正文提取的思路 - fancing - 博客园_files/style.css">
-<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/fancing/rss">
-<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/fancing/rsd.xml">
-<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/fancing/wlwmanifest.xml">
-<script src="./网页正文提取的思路 - fancing - 博客园_files/jquery.js" type="text/javascript"></script><style type="text/css"></style>  
-<script type="text/javascript">var currentBlogApp = 'fancing';</script>
-<script src="./网页正文提取的思路 - fancing - 博客园_files/blog-common.js" type="text/javascript"></script>
-<script async="" type="text/javascript" src="http://partner.googleadservices.com/gpt/pubads_impl_31.js"></script></head>
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="������Ȥ,���ֹ���,ְ����־" />
+<meta name="description" content="��һ�� �����Լ� �����ǳɹ��Ļ�ʯ���ʵ���ȷ�����������������κζ�������ʹ�˻��档 ;������������;ȫ���Ը�;����ѧϰ�� Ҫ�� 1����Զ��΢Ц�����Ĺ�����顢�쵼�Ͳ���; 2������������Ҫ��죬��̸�̺�Ц��; 3�����ر���Լ��ĳɾͣ��ܵ�����ʱһ" />
+<meta property="wb:webmaster" content="23cab78c53cb9f9a" />
+<meta http-equiv="Cache-Control" content="max-age=7200" />
+<title>����ڹ�����Ѱ����Ȥ ���ֹ���С����_��������һЩ��</title>
+<link type="text/css" rel="stylesheet" href="/min/?b=templets/yixieshi/styles&amp;f=bootstrap.css,index.css" />
+<link rel="alternate" type="application/rss+xml" href="http://feed.yixieshi.com/" title="��������һЩ��-��ע��������Ʒ������������Ʒ��ơ��û������ĵ�" />
+<!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://www.yixieshi.com/templets/yixieshi/styles/bootstrap-ie6.css">
+    <![endif]-->
+<!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="http://www.yixieshi.com/templets/yixieshi/styles/ie.css">
+    <![endif]-->
+<script type="text/javascript" src="/min/?b=templets/yixieshi/js&amp;f=jquery.js,jquery-migrate-1.2.1.js,jquery-lazyload.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(
+function($){
+$("#contrainer img").lazyload({
+placeholder : "http://www.yixieshi.com/templets/yixieshi/img/grey.gif",
+effect      : "fadeIn"
+});
+});
+</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+<script type="text/javascript">
+BAIDU_CLB_preloadSlots("860427","860426","860425","860424");
+</script>
+</head>
 <body>
-<a name="top"></a>
-
-<!--done-->
-<div id="home">
-<div id="header">
-	<div id="blogTitle">
-	<a id="lnkBlogLogo" href="http://www.cnblogs.com/fancing/"><img id="blogLogo" src="./网页正文提取的思路 - fancing - 博客园_files/logo.gif" alt="返回主页"></a>			
-		
-<!--done-->
-<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/fancing/">fancy's blog</a></h1>
-<h2></h2>
-
-
-
-		
-	</div><!--end: blogTitle 博客的标题和副标题 -->
-	<div id="navigator">
-		
-<ul id="navList">
-<li><a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
-<li><a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/fancing/">首页</a></li>
-<li><a class="menu" href="http://q.cnblogs.com/">博问</a></li>
-<li><a class="menu" href="http://home.cnblogs.com/ing/">闪存</a></li>
-<li><a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://www.cnblogs.com/fancing/admin/EditPosts.aspx?opt=1">新随笔</a></li>
-<li><a id="MyLinks1_ContactLink" class="menu" rel="nofollow" href="http://space.cnblogs.com/msg/send/fancing">联系</a></li>
-<li><a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/fancing/rss">订阅</a>
-<!--<a id="MyLinks1_XMLLink" class="aHeaderXML" href="http://www.cnblogs.com/fancing/rss"><img src="http://www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
-<li><a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://www.cnblogs.com/fancing/admin/EditPosts.aspx">管理</a></li>
-</ul>
-		<div class="blogStats">
-			
-			
-<!--done-->
-随笔- 28&nbsp;
-文章- 0&nbsp;
-评论- 3&nbsp;
-
-			
-		</div><!--end: blogStats -->
-	</div><!--end: navigator 博客导航栏 -->
-</div><!--end: header 头部 -->
-
-<div id="main">
-	<div id="mainContent">
-	<div class="forFlow">
-		
-
-<!--done-->
-<div id="topics">
-	<div class="post">
-		<h1 class="postTitle">
-			<a id="cb_post_title_url" class="postTitle2" href="./网页正文提取的思路 - fancing - 博客园_files/网页正文提取的思路 - fancing - 博客园.htm">网页正文提取的思路</a>
-		</h1>
-		<div class="clear"></div>
-		<div class="postBody">
-			<div id="cnblogs_post_body"><p>在不断追踪网页文本提取的技术，这篇文章中提到的做法很有实用价值！&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p>&nbsp; 网页由于格式千变万化，要找到一种能提取任意网页正文的算法，并能达到应用需要的准确度，具有一定难度。因此，总避免不了在提取程序中添加一些规则，对不同的网页类型作不同处理。另外，有人利用开源的Tidy,把不规范的网页规范化，然后利用DOM Tree，把包含正文的&lt;talbe&gt;...&lt;/table&gt;提取出来，然后去除其中的链接信息。 还有一种简单的方法：对网页中的所有&lt;table&gt; ...&lt;/table&gt;，计算其中所含内容中的中文标点符号，并结合内容中所包含的链接数，综合判断，以确定到底哪个&lt;table&gt;...&lt;/table&gt;最有可能为正文。具体的判断方法，可以通过实验观察来确定。</p>
-<p>规则解决不了一切，但是可以解决一大部分问题。如果弄一个马上可以用的，规则是最好的方法。如果是做研究，自动抽取规则，或者识别网页中的block信息应该是不错方法，目前已经有相关文章了。</p>
-<p>基于视觉的是比较新的，不过，基于分块识别的也还可以。广告部分有比较多的链接。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 正文一般应该是网页中最长的部分，我这次要介绍的是如何抽取正文，这部分是最为核心的．因为如果不能很好的提取原有文章的内容和样式，那么搜索出来的东西就会惨不忍睹．根本就没有使用价值。在做正文抽取模块之前我曾经参考过很多抽取模式，有配置模版的，有搞视觉匹配的．有搞关键字识别的．我挨个做了分析首先配置摸版是不太现实的，因为我在搜索技术资讯的时候，根本不知道会搜索到哪个网站，也根本没精力去配置摸版．所以这个行不通。基于视觉效果的分析，这个难度比较大，而且只适合于规范的网站，而现在很多网站根本不规范，广告链接漫天飞．人家都把最好的位置留给广告了．而且我一直怀疑这个模式的可行性，它只是一个善意的推测．所以这方面没做过多尝试。我在想，是否有种简单的方法呢？难道就没有什么共性吗？</p>
-<p>　　我想所有的正文应该有个共同的特点，那就是正文的长度应该超过其他文字组合的长度．很少会有一句话的正文，很少会有长度短于标题的正文．所以这个应该成为一个突破口．</p>
-<p>　　接下来，有一个很重要的问题，那段最长的正文在哪里呢？肯定是在一个TABLE，或者DIV，或者ParagraphTag里．那好，那就找到那个包含文字最多的DIV或者TABLE．不过问题又来了，HTML页面，经常是HTML元素的长度超过了正文的长度，有时候混入了不少的JAVASCRIPT．这些元素HTMLPARSER经常会误认为是正文加以识别，导致很多正文竟然是一段JAVASCRIPT．<br>　　祛除杂质是一个关键，这里面要把那些ＨＴＭＬ中常用的标签，以及连接中正文去除掉，否则，你搜索出来的很可能是别的什么，尤其当正文文字相对较少的时候．我在搜索SOHU页面的时候就经常遇到这个问题，原因是SOHU的页面不是严格按照DIV布局，里面有很多广告的JAVASCRIPT。新浪的有些页面也有这个现象，反到是一些中小网站的布局很规范，呵呵，真奇怪了。</p>
-<p>　　做完这些工作后，我发现仍然有些网页不能正常抓取，原因是HTMLPARSER对TEXT的认识有问题．例如一段文字在ParagraphTag中或者span中包含的，就不能很好的识别．所以要单独做个抽取ParagraphTag内容的函数．</p>
-<p>　　做完这些步骤后，有一个问题出来了就是正文中包含的图片，连接，粗体，正常的表格．这些问题一个个的冒出来．既然问题出来了那就要一个个的解决．解决了这些难题．我的网站抓取文章的质量就大大的提高了85%的准确率，基本达到实用阶段．我网站上的正文快照基本和原文保持一致．</p>
-<p>-----------------------------------------------------------------------------------------------------------------------------------</p>
-<p>蛙蛙推荐：基于标记窗的网页正文提取算法的一些细节问题</p>
-<p>&nbsp;&nbsp; 网页的正文提取有好多种算法，有基于视觉的，基于标记窗的，基于双层决策等算法，这里讨论一些基于标记窗的算法（相对简单且效果还好）的相关细节问题，如下</p>
-<p>&nbsp;&nbsp;&nbsp; 问题：如何提取一个网页的标题 <br>&nbsp;&nbsp;&nbsp; 思路：提取网页的title，提取网页的meta里的keyword，提取网页里的所有h标签，先用title和keyword比，把title里的 keyword去掉，因为某些网站做SEO，在keyword和title里都有关键词堆叠，所以去掉重复的项，一般就是网页内容的标题了。一般一个网站的所有网页的keyword都相同，但碰上每个网页的meta keyword和本页内容相关这个算法就不灵了。然后再计算裁剪后的title和h标签（有限h1，h2次之）里提取的文本的文本相似度或者编辑距离，如果少于某个阈值，这个h标签的文本就是网页的标题。另外还要考虑title和正文标题一点关系都没有的情况。提取标题的算法有好多不可靠性，实在不行就直接去title了。</p>
-<p>&nbsp;&nbsp;&nbsp; 问题：如下文字,两个横杠之间的文字，</p>
-<p>================================================== <br>&lt;div&gt;没有花香， <br>没有树高&lt;/div&gt;&lt;td&gt;((:&amp;nbsp;那就等 着沦陷吧，如果爱情真伟大&lt;/td&gt; <br>&lt;div&gt;我早已为你种下&lt;b&gt;九百九十九&lt;/b&gt;多 玫瑰&lt;/div&gt; <br>&lt;div&gt;妹妹你坐船头，&lt;td&gt;哥哥我岸上走sdf&lt;/td&gt;&lt;/div&gt; <br>==================================================</p>
-<p>&nbsp;&nbsp;&nbsp; 用正则分成以下几组字符串，引号引住的部分</p>
-<p>&nbsp;&nbsp;&nbsp; 1、"没有花香,\r\n没有树高" <br>&nbsp;&nbsp;&nbsp; 2、" 那就等着沦陷吧，如果爱情真伟大" <br>&nbsp;&nbsp;&nbsp; 3、"我早已为你种下九百九十九多玫瑰" <br>&nbsp;&nbsp;&nbsp; 4、"妹妹你坐船头，哥哥我岸上走sdf" <br>&nbsp;&nbsp;&nbsp; 5、"哥哥我岸上走sdf"</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 思路：其实就是取出html容器标签(td,div,span,p等)里的汉字部分，并且如果是嵌套容器的话，最里层的匹配一个分组，一直向外，每层算一个分组，最后把每个分组弄成一个字符串的列表</p>
-<p>&nbsp;&nbsp;&nbsp; 问题：如何用正则把一段html文本块取出其带格式的文本 <br>&nbsp;&nbsp;&nbsp; 思路：首先要去掉修饰性标签，&lt;b&gt;,&lt;font&gt;还有&lt;img&gt;等，其次要把&lt;br&gt;替换成\r\ n，&amp;nbsp;替换成空格，再把&lt;srcipt&gt;&lt;style&gt;等标签及其中间的字符都去了，想&lt;a title="嘿嘿"&gt;这个标签里的"嘿嘿"不能算是正文，正文中的链接不能去掉，要改成“百度(http://www.baidu.com/)”这样的格式，否则提取文本后链接信息就没了。</p>
-<p>&nbsp;&nbsp;&nbsp; 问题：一个标题和多个正文，如何用程序来判断这个标题属于这个正文的 <br>&nbsp;&nbsp;&nbsp; 思路：把标题用中科院分词系统分词，然后去除停止词，然后根据词性标注把实词取出来，记为S,然后看每个正文里S里的每个词出现的次数，无论哪个词，取出现次数最多的那个正文就是这个标题的正文，我觉得这个思路比把标题和正文都切词后用编辑距离比较的算法更准一些，而且正文和标题切词后是两个字符串数组，两个字符串数组貌似没有现成的算法算他们之间的距离的。</p>
-<p>&nbsp;&nbsp;&nbsp; 问题：有若干段儿html文本块，去掉大多数为超链接的文本块 <br>&nbsp;&nbsp;&nbsp; 思路：先算出每个文本块中所有汉字的数量，再算出每个文本块中被&lt;a&gt;标签包围的汉字数量，如果这两个值的比例大于某个阈值，就删除这个文本块</p>
-<p>&nbsp;&nbsp;&nbsp; 以上几个文本解决后，网页的正文提取就能做的差不多了，最起码有百分之七八十的正确率吧。大家有兴趣和我一起解决哦，呵呵呵。</p>
-<p>----------------------------------------------------------------------------------------------------------------------------------</p>
-<p>一般是用DOM的方法 <br>不过抽取的时候 要分authority和hub网页分开处理 <br>还有bbs网页 <br>bbs网页最好采用xpath的方法 <br>每个名次都是一系列的技术 <br>一般的authority网页可以用DOM的比较方法 <br>需要注意div和table 一般网页的内容都放在里面</p></div><div id="MySignature"></div>
-<div class="clear"></div>
-<div id="blog_post_info_block">
-<div id="blog_post_info"><div id="BlogPostCategory"></div>
-<div id="EntryTag"></div>
-<div id="green_channel">
-绿色通道：
-<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(cb_entryId,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
-<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
-<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/fancing" target="_blank">与我联系</a>
-<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./网页正文提取的思路 - fancing - 博客园_files/icon_weibo_24.png" alt=""></a>
-</div>
-<div id="digg_block">
-<div id="author_profile">
-<div id="author_profile_info" class="author_profile_info">
-<div id="author_profile_detail" class="author_profile_info">
-<a href="http://home.cnblogs.com/u/fancing/">fancing</a><br>
-<a href="http://home.cnblogs.com/u/fancing/followees">关注 - 2</a><br>
-<a href="http://home.cnblogs.com/u/fancing/followers">粉丝 - 3</a>
-</div>
-</div>
-<div class="clear"></div>
-<div id="author_profile_honor"></div>
-<div id="author_profile_follow">
-<a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
-</div>
-</div>
-<div id="div_digg">										
-	<div class="diggit" onclick="votePost(cb_entryId,&#39;Digg&#39;)"> 
-		<span class="diggnum" id="digg_count">0</span>
-	</div>
-	<div class="buryit" onclick="votePost(cb_entryId,&#39;Bury&#39;)"> 
-		<span class="burynum" id="bury_count">0</span>
-	</div>
-	<div class="clear"></div>	
-	<div class="diggword" id="digg_tips">
-    (请您对文章做出评价)
-    </div>	
-</div>
-</div></div>
-<div class="clear"></div>
-<div id="post_next_prev"><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446778.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446778.html" title="发布于2012-04-14 09:41">网页正文抽取-能用的抽取-代码-java</a><br><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446805.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446805.html" title="发布于2012-04-14 10:05">python的</a><br></div>
-</div>
-
-
+<div class="header">
+	<div class="topbar topsection">
+		<div class="inner">
+			<p class="pull-left"><a href="http://www.yixieshi.com/">��������һЩ��</a>��ע��������Ʒ������������Ʒ��ơ��û������ĵã�</p>
+			<ul class="pull-right subscribe">
+				<li><a href="http://list.qq.com/cgi-bin/qf_invite?id=8060c2cdd1cc4596df65916e01e77feae8d91e151386ef49" title="���䶩��" target="_blank"><i class="icons email-icon"></i>���䶩��</a></li>
+				<li><a href="http://feed.yixieshi.com/" title="RSS����" target="_blank"><i class="icons rss-icon"></i>RSS����</a></li>
+				<li><a href="http://e.weibo.com/yixieshi" title="����΢��" target="_blank"><i class="icons sina-icon"></i>����΢��</a></li>
+			</ul>
 		</div>
-		<div class="postDesc">posted @ <span id="post-date">2012-04-14 09:59</span> <a href="http://www.cnblogs.com/fancing/">fancing</a> 阅读(<span id="post_view_count">1305</span>) 评论(<span id="post_comment_count">0</span>)  <a href="http://www.cnblogs.com/fancing/admin/EditPosts.aspx?postid=2446798" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446798.html#" onclick="AddToWz(2446798);return false;">收藏</a></div>
 	</div>
-	<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=62979,cb_entryId=2446798,cb_blogApp=currentBlogApp,cb_blogUserGuid='05a43689-a8d1-de11-ba8f-001cf0cd104b',cb_entryCreatedDate='2012/4/14 9:59:00';loadViewCount(cb_entryId);</script>
-	
-</div><!--end: topics 文章、评论容器-->
-<a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
-<div id="comment_form" class="commentform">
-<a name="commentform"></a>
-<div id="divCommentShow"></div>
-<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446798.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446798.html#top">返回顶部</a></div>
-<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
-<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
-<div id="site_nav_under"><a href="http://www.cnblogs.com/" target="_blank" title="程序员的网上家园">博客园首页</a><a href="http://q.cnblogs.com/" target="_blank" title="程序员问答社区">博问</a><a href="http://news.cnblogs.com/" target="_blank" title="IT新闻">新闻</a><a href="http://home.cnblogs.com/ing/" target="_blank">闪存</a><a href="http://job.cnblogs.com/" target="_blank">程序员招聘</a><a href="http://kb.cnblogs.com/" target="_blank">知识库</a></div>
-<div id="ad_under_post_holder">
-
-<div id="google_ad_c1" class="c_ad_block">
-    <!-- cnblogs_blogpost_C1_sitehome -->
-    <div id="div-gpt-ad-1346480159711-0" style="width:300px; height:250px;">
-    
-    </div>
-</div>
-<div id="blog_news_kb"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/195109/" target="_blank">Mozilla 推出多进程架构版 Firefox</a><br> ·  <a href="http://news.cnblogs.com/n/195108/" target="_blank">黑米手机真机照曝光：可能配8核处理器 明年发布</a><br> ·  <a href="http://news.cnblogs.com/n/195107/" target="_blank">魅族又发飙了</a><br> ·  <a href="http://news.cnblogs.com/n/195106/" target="_blank">二三线城市青年年末互联网装逼指南</a><br> ·  <a href="http://news.cnblogs.com/n/195105/" target="_blank">每天 24 小时，这里都在焚烧废旧的电子产品</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/194742/" target="_blank">数字证书及CA的扫盲介绍</a><br> ·  <a href="http://kb.cnblogs.com/page/112298/" target="_blank">领域驱动设计和实践</a><br> ·  <a href="http://kb.cnblogs.com/page/181283/" target="_blank">编码风格不是编码规范</a><br> ·  <a href="http://kb.cnblogs.com/page/191938/" target="_blank">对于现代开发来说，Javascript就是一种垃圾语言</a><br> ·  <a href="http://kb.cnblogs.com/page/193913/" target="_blank">教你一眼认出英语单词的意思</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div></div>
-<script type="text/javascript">
-var enableGoogleAd = true;
-var googletag = googletag || {};
-googletag.cmd = googletag.cmd || [];
-fixPostBodyFormat();
-loadAdUnderPost();
-</script>
-<div id="HistoryToday" class="c_ad_block"></div>
-<script type="text/javascript">
-loadBlogSignature();
-LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
-GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
-GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
-</script>
-<script type="text/javascript">
-    $.ajax({ url: 'http://counter.cnblogs.com/blog/post/' + cb_entryId, type: 'get', dataType: 'script', cache: true });
-</script>
-</div>
-
-	</div><!--end: forFlow -->
-	</div><!--end: mainContent 主体内容容器-->
-
-	<div id="sideBar">
-		<div id="sideBarMain">
-			
-<!--done-->
-<div class="newsItem">
-<h3 class="catListTitle">公告</h3>
-	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/fancing/">fancing</a><br>园龄：<a href="http://home.cnblogs.com/u/fancing/" title="入园时间：2009-11-15">4年</a><br>粉丝：<a href="http://home.cnblogs.com/u/fancing/followers/">3</a><br>关注：<a href="http://home.cnblogs.com/u/fancing/followees/">2</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;05a43689-a8d1-de11-ba8f-001cf0cd104b&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
-</div>
-
-			<div id="blog-calendar" style="displya:none"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
-	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
-		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/03/01&#39;);return false;">&lt;</a></td><td align="center">2012年4月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/05/01&#39;);return false;">&gt;</a></td></tr>
-	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center"><a href="http://www.cnblogs.com/fancing/archive/2012/04/11.html"><u>11</u></a></td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/fancing/archive/2012/04/14.html"><u>14</u></a></td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td></tr>
-</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
-			
-			<div id="leftcontentcontainer">
-				<div id="blog-sidecolumn">
-
-<div class="mySearch">
-<h3 class="catListTitle">搜索</h3>
-<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
-<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
-</div>
-
-
-<div class="catListLink">
-<h3 class="catListTitle">常用链接</h3>
-<ul>
-
-		<li><a id="ctl01_rptMainLinks_lnkLinkItem_0" href="http://www.cnblogs.com/fancing/MyPosts.html">我的随笔</a></li>
-	
-		<li><a id="ctl01_rptMainLinks_lnkLinkItem_1" href="http://www.cnblogs.com/fancing/MyComments.html">我的评论</a></li>
-	
-		<li><a id="ctl01_rptMainLinks_lnkLinkItem_2" title="我发表过评论的随笔" href="http://www.cnblogs.com/fancing/OtherPosts.html">我的参与</a></li>
-	
-		<li><a id="ctl01_rptMainLinks_lnkLinkItem_3" href="http://www.cnblogs.com/fancing/RecentComments.html">最新评论</a></li>
-	
-		<li><a id="ctl01_rptMainLinks_lnkLinkItem_4" href="http://www.cnblogs.com/fancing/tag/">我的标签</a></li>
-	
-<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446798.html#">更多链接</a></li>
-</ul>
-<div id="itemListLin_con" style="display:none;">
-<ul>
-
-</ul>
-</div>
-</div>
-<div class="catListPostArchive">
-<h3 class="catListTitle">随笔档案</h3>
-
-<ul>
-
-<li><a id="ctl03_CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/fancing/archive/2012/04.html">2012年4月 (8)</a> </li>
-
-<li><a id="ctl03_CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/fancing/archive/2012/03.html">2012年3月 (2)</a> </li>
-
-<li><a id="ctl03_CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/fancing/archive/2010/03.html">2010年3月 (12)</a> </li>
-
-<li><a id="ctl03_CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/fancing/archive/2010/02.html">2010年2月 (1)</a> </li>
-
-<li><a id="ctl03_CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/fancing/archive/2009/11.html">2009年11月 (5)</a> </li>
-
-</ul>
-
-</div>
-
-
-<div class="catListComment">
-<h3 class="catListTitle">最新评论<a id="_b55442_RSSHyperlink1" title="RSS订阅最最新评论" href="http://www.cnblogs.com/fancing/CommentsRSS.aspx"><img title="RSS订阅最最新评论" src="./网页正文提取的思路 - fancing - 博客园_files/xml.gif" alt=""></a></h3>
-
-	<div id="RecentCommentsBlock"><ul>
-    <li class="recent_comment_title"><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446770.html#2816710">1. Re:C#实现网页正文提取算法</a></li>
-    <li class="recent_comment_body">@佰叱 只给有需要的朋友一个选择，原理都写了，而且我也写明，程序不难，有空余时间的建议自己写，不需要买。开源是一种奉献精神，但是如果你说要分享就必须得奉上源码，不敢苟同。如果，有人找你写程序，却说你得有开源精神，不需要给你报酬，想必你也不愿意，开源并不等于免费。</li>
-    <li class="recent_comment_author">--xuzhibin</li>
-    <li class="recent_comment_title"><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446770.html#2816661">2. Re:C#实现网页正文提取算法</a></li>
-    <li class="recent_comment_body">@xuzhibin引用这里也有一个识别率还可以正文提取算法，有兴趣的同学可以去看看：http://www.qwolf.com/?p=791我看你到处打广告,如果你真心分享的话,不要你的全部源码,连算法也不共享,再说博客园里都是免费的,你突然来个这个,没人会买的.</li>
-    <li class="recent_comment_author">--佰叱</li>
-</ul>
-</div>
-</div>
-
-<div class="catListView">
-<h3 class="catListTitle">阅读排行榜</h3>
-	<div id="TopViewPostsBlock"><ul><li><a href="./网页正文提取的思路 - fancing - 博客园_files/网页正文提取的思路 - fancing - 博客园.htm">1. 网页正文提取的思路(1306)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446770.html">2. C#实现网页正文提取算法(733)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2009/11/22/1608347.html">3. 数据结构-一元多项式加减乘(689)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446778.html">4. 网页正文抽取-能用的抽取-代码-java(572)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2010/03/21/1690812.html">5. php+mysql无限级分类(非递归)(386)</a></li></ul></div>
-</div>
-
-<div class="catListFeedback">
-<h3 class="catListTitle">评论排行榜</h3>
-	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446770.html">1. C#实现网页正文提取算法(3)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446761.html">2. 网页内容正文提取算法收集(0)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2009/11/15/1603369.html">3. LoadIcon(nFaceID[i])(0)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2009/11/22/1608288.html">4. 数据结构-栈(0)</a></li><li><a href="http://www.cnblogs.com/fancing/archive/2009/11/22/1608293.html">5. 数据结构-单链表(0)</a></li></ul></div>
-</div>
-
-<div class="catListView">
-<h3 class="catListTitle">推荐排行榜</h3>
-<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/fancing/archive/2012/04/14/2446778.html">1. 网页正文抽取-能用的抽取-代码-java(1)</a></li></ul></div>
-</div></div><script type="text/javascript">loadBlogSideColumn();</script>
+	<div class="topsection clearfix">
+		<div class="inner"> <a href="http://www.yixieshi.com/" class="logo pull-left">��������һЩ��</a>
+			<div class="search pull-right">
+				<form class="form-search" action="http://www.yixieshi.com/plus/search.php" name="formsearch">
+					<select name="searchtype" style="display:none;"  id="search-option">
+						<option value="titlekeyword" selected='1'>����ģ������</option>
+						<option value="title">����������</option>
+					</select>
+					<input type="hidden" name="kwtype" value="0" />
+					<input type="text" value="" name="keyword" id="search-keyword" placeholder="���������Ȥ�����ݡ�"/>
+					<input type="submit" class="btn " value="��ѯ"/>
+				</form>
 			</div>
-			
-		</div><!--end: sideBarMain -->
-	</div><!--end: sideBar 侧边栏容器 -->
-	<div class="clear"></div>
-	</div><!--end: main -->
-	<div class="clear"></div>
-	<div id="footer">
+		</div>
+	</div>
+	<div class="topsection topnavbar">
+		<div class="inner">
+			<ul class="menu clearfix">
+				<li><a href='http://www.yixieshi.com/'>��ҳ</a></li>
+				
+				<li><a href='http://www.yixieshi.com/it/' ><span>����������</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/ucd/' ><span>�������</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/pd/' ><span>��Ʒ��Ӫ</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/b2b/' ><span>��������</span></a></li>
+				<li class='active'><a href='http://www.yixieshi.com/zhichang/' ><span>ְ����־</span></a></li>
+				<li><a href='http://www.yixieshi.com/youqu/' ><span>��Ȥ����</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/web/' ><span>��վ����</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/book/' ><span>��ѡͼ��</span></a></li>
+				
+				<li><a href='http://www.yixieshi.com/hao/'  rel='dropmenu20'><span>��ַ����</span></a></li>
+				
+			</ul>
+		</div>
+	</div>
+	<div class="topsection subnavbar">
+		<div class="inner">
+			<ul>
+				
+				<li><a href='http://www.yixieshi.com/tags/%CA%D6%BB%FA%B2%FA%C6%B7.html'>�ֻ���Ʒ</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%D2%C6%B6%AF%BB%A5%C1%AA%CD%F8.html'>�ƶ�������</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%D3%C3%BB%A7%D1%D0%BE%BF.html'>�û��о�</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%C6%BB%B9%FB.html'>ƻ��</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%D3%C3%BB%A7%D0%D0%CE%AA%B7%D6%CE%F6.html'>�û���Ϊ����</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%B0%D9%B6%C8.html'>�ٶ�</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%BD%E7%C3%E6%C9%E8%BC%C6.html'>�������</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%B2%FA%C6%B7%D3%AA%CF%FA.html'>��ƷӪ��</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%CA%D3%BE%F5%C9%E8%BC%C6.html'>�Ӿ����</a></li>
+				
+				<li><a href='http://www.yixieshi.com/tags/%D4%AD%D0%CD%C9%E8%BC%C6.html'>ԭ�����</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="content container">
+	<div class="row">
+		<div id="contrainer" class="span8">
+			<div class="article">
+				<h1 class="heading">����ڹ�����Ѱ����Ȥ ���ֹ���С����</h1>
+				<div class="meta txt-shadow">
+					<p> <span>ʱ�䣺2010-06-22 09:47</span> <span>��Դ��<a href="http://www.yixieshi.com" target="_blank">δ֪</a></span> <span>���ߣ����α༭</span> </p>
+				</div>
+				<div class="artCon"> <p><strong>������һ�� �����Լ�</strong></p>
+<p>���������ǳɹ��Ļ�ʯ���ʵ���ȷ�����������������κζ�������ʹ�˻��档</p>
+<p>����;������������;ȫ���Ը�;����ѧϰ��</p>
+<p><strong>����Ҫ��</strong></p>
+<p>����1����Զ��΢Ц�����Ĺ�����顢�쵼�Ͳ���;</p>
+<p>����2������������Ҫ��죬��̸�̺�Ц��;</p>
+<p>����3�����ر���Լ��ĳɾͣ��ܵ�����ʱһ��˵&ldquo;лл&rdquo;;</p>
+<p>����4������������˶���İ���;</p>
+<p>����5�����μӻ��¿�ˮ����ɧ�ۻᡣ</p>
+<p><strong>�����ڶ��� ���ҽ�̸</strong></p>
+<p>�����϶��Լ���һ�У����������������Ҫ�ؼ���</p>
+<p>����;������ʧ����ѧϰ�ɹ����������ƶ�Ŀ�꣬����ʧ��;�ز��Լ��Ĺ���ʷ������ʷ���������ĵĹ���������ʹ���ػ��������ָ��ֹۡ�</p>
+<p><strong>����Ҫ��</strong></p>
+<p>����1�������̸���Լ�ʱ���ÿ϶����������ݴʺ͸���;</p>
+<p>����2�����ϵ����������ҽ�̸��д����ĳ���;</p>
+<p>����3�������Լ�������е����Ը�������ܳɹ����龰;</p>
+<p>����4���˷�ʥ�ͣ������޹�?���ֲ���ʱ�����Լ��´ο������ĸ��á�</p>
+<p><strong>���������� ̬�Ȼ���</strong></p>
+<p>�����ȳ��ǻᴫȾ�ģ���һ�������о�������ǰ������ѱ�����Į��̬�ȡ�������̬�ܼ����Էȣ��������;�������˻�ɢ�������������úͽ�ȡ�Ĺ�â����������̬ʹ�˼ʹ�ϵ�񻯣�����������;����Ӱ���˵����Ľ�����</p>
+<p>����;�������ֻ�������̬��</p>
+<p><strong>����Ҫ��</strong></p>
+<p>����1�������뱯�۵���Ϊ��;</p>
+<p>����2���û���˼���ķ�ʽ�̼����������Է�;</p>
+<p>����3����Ҫ����Թ������;</p>
+<p>����4�������𴲣�����Ҫ���;</p>
+<p>����5���û����ķ�ʽ˼�����⡣</p>
+<p><strong>���������� ��������</strong></p>
+<p>��������������Ϸ�У��õ�һ�ֺ��Ʋ���ɹ����ܰ�һ�����ƴ�ò��ǳɹ���һ����˵������ʲô�������ܵõ�ʲô���˲����ܱ��ֳ���Խ�Լ�������ˮ׼��</p>
+<p>���������Լ���������֡��������� &mdash;&mdash;�ֹۡ�Ͷ�롢���顢Ŀ�ꡢ���ġ�ϣ������Щ��������������ͬ��ʡ�</p>
+<p><strong>����Ҫ��</strong></p>
+<p>����1�������Լ�˵��&ldquo;��Ҫ�������ã��һ����ø���&rdquo;;</p>
+<p>����2��������Ϊ����;</p>
+<p>����3�������ô���&mdash;&mdash;���Լ����佡����˼��;</p>
+<p>����4���Ա���&mdash;&mdash;������˾��ͬ�º�����Ҳͬ��������ߵ�������</p>
+<p><strong>���������� �趨Ŀ��</strong></p>
+<p>����û��Ŀ�ĵصĴ�����Զ������˳�硣</p>
+<p>����;����Ϊ�Լ��趨Ŀ��(�г�Զ�ͽ׶�Ŀ�ꡣ������Ҫѵ���׶�Ŀ��)�D�Dҵ��;�������;����ĳ&ldquo;����&rdquo;�ȡ�</p>
+<p><strong>����Ҫ��</strong></p>
+<p>����1�������Լ�����Ҫ��Ŀ��(�Լ���������);</p>
+<p>����2�����Ѵ��Ŀ����������ڴ��Ŀ���������;</p>
+<p>����3���ᶨ����;</p>
+<p>����4�����ܼƻ����������ж���</p>
+<p> </div>
+				<div class="pages">
+					<ul class="pagelist">
+						<li><span class="pageinfo">��4ҳ: </span></li><li>��һҳ</li><li class="thisclass">1</li><li><a href='1107_2.html'>2</a></li><li><a href='1107_3.html'>3</a></li><li><a href='1107_4.html'>4</a></li><li><a href='1107_2.html'>��һҳ</a></li>
+					</ul>
+				</div>
+				<div class="arteditor">
+					<p>Χ��: <span id="countnum">9999</span>�� | <span>���α༭�����α༭</span></p>
+				</div>
+				<div class="share-wrap clearfix">
+					<div class="pageShare pull-left"> <strong>�����Է�����:</strong> 
+						<!-- Baidu Button BEGIN -->
+						<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="������QQ�ռ�"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="����������΢��"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="��������Ѷ΢��"></a><a href="#" class="bds_youdao" data-cmd="youdao" title="�������е��Ʊʼ�"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="������QQ����"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="������΢��"></a></div>
+						<!-- Baidu Button END --> 
+					</div>
+					<div class="wxqrcode pull-right"><img src='http://www.yixieshi.com/images/yixieshi_wx.gif' alt='��ע��������һЩ��΢��' /></div>
+				</div>
+				<div class="context">
+					<ul>
+						<li class="pull-left">��һƪ��<a href='http://www.yixieshi.com/zhichang/1106.html'>����˾������ͻ����ô�� ��λ���ͬ��˾��ì��</a> </li>
+						<li class="pull-right">��һƪ��<a href='http://www.yixieshi.com/zhichang/1181.html'>VC��Ͷʮ�󱯾磺��Ҫѡ�ԡ��ܵ�����Ҫѡ�ԡ��˶�Ա��</a> </li>
+					</ul>
+				</div>
+				<div class="Ext-read clearfix">
+					<div class="title-read pull-left">
+						<div class="hd">
+							<h3 class="heading">�����Ķ�</h3>
+						</div>
+						<ul class="list">
+							<li><a href="http://www.yixieshi.com/zhichang/17113.html" title="�����ÿ���񣢴�ɻ����� ���ֵĹ�����" target="_blank">�����ÿ���񣢴�ɻ����� ���ֵĹ�����</a><span>2014-05-06</span></li>
+<li><a href="http://www.yixieshi.com/zhichang/17064.html" title="ְ����־���ǿư������γ�Ϊ�ȸ����ʦ" target="_blank">ְ����־���ǿư������γ�Ϊ�ȸ����ʦ</a><span>2014-05-03</span></li>
+<li><a href="http://www.yixieshi.com/zhichang/17048.html" title="��Ա�����ܼ࣬��Ҫ���׵�8��������" target="_blank">��Ա�����ܼ࣬��Ҫ���׵�8��������</a><span>2014-04-30</span></li>
+<li><a href="http://www.yixieshi.com/zhichang/16855.html" title="��һ�ҹ�˾����ú��ʣ�" target="_blank">��һ�ҹ�˾����ú��ʣ�</a><span>2014-04-21</span></li>
+<li><a href="http://www.yixieshi.com/zhichang/16779.html" title="������ʮ���ϰ壬������Ϊ�ϲ߰ɣ�" target="_blank">������ʮ���ϰ壬������Ϊ�ϲ߰ɣ�</a><span>2014-04-15</span></li>
+<li><a href="http://www.yixieshi.com/it/16742.html" title="ʵϰȥ��ҵ��С��˾���ǳ����˾��" target="_blank">ʵϰȥ��ҵ��С��˾���ǳ����˾��</a><span>2014-04-11</span></li>
+
+						</ul>
+					</div>
+					<div class="keywords-read pull-right">
+						<div class="hd">
+							<h3 class="heading">�ؼ���</h3>
+						</div>
+						<div class="keywords"><a href="http://www.yixieshi.com/zhichang/" rel="category" class="label">ְ����־</a><a href='http://www.yixieshi.com/tags/%BF%EC%C0%D6%B9%A4%D7%F7.html' class="label">���ֹ���</a><a href='http://www.yixieshi.com/tags/%D6%B0%B3%A1%C0%F8%D6%BE.html' class="label">ְ����־</a><a href='http://www.yixieshi.com/tags/%B9%A4%D7%F7%C0%D6%C8%A4.html' class="label">������Ȥ</a></div>
+					</div>
+					<div class="returnlink clearfix btn-group"> <a href="http://www.yixieshi.com" class="btn">&lt; ������ҳ</a> <a href="http://www.yixieshi.com/zhichang/" class="btn">ְ����־ &gt;</a> </div>
+				</div>
+				<div class="money clearfix">
+					<div class="g300-250"><script type="text/javascript">BAIDU_CLB_fillSlot("860427");</script></div>
+					<div class="g300-250"><script type="text/javascript">BAIDU_CLB_fillSlot("860426");</script></div>
+				</div>
+				<div class="postRelated clearfix"> 
+					<script type="text/javascript" id="wumiiRelatedItems"></script> 
+					<script type="text/javascript">
+					var wumiiPermaLink = "http://www.yixieshi.com/zhichang/1107.html";
+					var wumiiTitle = "����ڹ�����Ѱ����Ȥ ���ֹ���С����";
+					var wumiiTags = "���ֹ���,ְ����־,������Ȥ,";
+					var wumiiSitePrefix = "http://www.yixieshi.com/";
+					var wumiiParams = "&num=5&mode=2&pf=JAVASCRIPT";
+					</script> 
+					<script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget"></script> 
+				</div>
+				<!-- duoshuo Begin --> 
+				<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"  data-thread-key="1107" data-author-key="12"  data-url="http://www.yixieshi.com/zhichang/1107.html" data-title="����ڹ�����Ѱ����Ȥ ���ֹ���С����"></div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name: "yixieshi"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+<div id="ds-ssr" class="mt1">
+	<dl class="tbox">
+		<dt> <strong>�����б����������۽������ѱ�����˿���������������վͬ����۵��֤ʵ��������</strong> </dt>
+		<dd>
+			<div class="dede_comment">
+				<div class="decmt-box1">
+					<ul>
+						<li id="commetcontentNew"></li>
+
+ 
+					</ul>
+				</div>
+			</div>
+		</dd>
+	</dl>
+</div>
+
+ 
+				<!-- duoshuo End --> 
+			</div>
+		</div>
+		<!--������½���-->
+		<div class="span4">
+			<div class="sidebox">
+				<div class="mbox"><script type="text/javascript">BAIDU_CLB_fillSlot("860425");</script></div>
+			</div>
+			<div class="sidebox">
+				<div class="mbox"> <!--������QQ�ʼ��б�����Ƕ�����--><script >var nId = "50b79bb936889e26c69801c3c1b3f9bfcfebbcd7ed424782",nWidth="auto",sColor="light",sText="��д�����ʼ���ַ�����ľ������ݣ�" ;</script><script src="http://list.qq.com/zh_CN/htmledition/js/qf/page/qfcode.js" charset="gb18030"></script> </div>
+			</div>
+			<div class="sidebox">
+				<div class="hotlist">
+					<div class="hd">
+						<h2 class="heading pull-left">�����Ƽ�</h2>
+						<div class="tab pull-right">
+							<ul class="toptabs">
+								<li class="active"><a href="#diggcnt1" data-toggle="tab">���</a></li>
+								<li><a href="#diggcnt2" data-toggle="tab">����</a></li>
+								<li><a href="#diggcnt3" data-toggle="tab">����</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="tab-content">
+						<ol id="diggcnt1" class="diggArea tab-pane fade active in">
+							<li>
+								<div><span class='diggNum h'>1</span><a href="http://www.yixieshi.com/zhichang/17096.html" target="_blank" title="����ְ��������������û�����ʱ��">����ְ��������������û�����ʱ��</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>2</span><a href="http://www.yixieshi.com/zhichang/17110.html" target="_blank" title="���Ե�ʱ�����̸н�������">���Ե�ʱ�����̸н�������</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>3</span><a href="http://www.yixieshi.com/zhichang/17064.html" target="_blank" title="ְ����־���ǿư������γ�Ϊ�ȸ����ʦ">ְ����־���ǿư������γ�Ϊ�ȡ�</a></div>
+							</li>
+<li>
+								<div><span class='diggNum'>4</span><a href="http://www.yixieshi.com/zhichang/17113.html" target="_blank" title="�����ÿ���񣢴�ɻ����� ���ֵĹ�����">�����ÿ���񣢴�ɻ����� ���֡�</a></div>
+							</li>
+
+						</ol>
+						<ol id="diggcnt2" class="diggArea tab-pane fade">
+							<li>
+								<div><span class='diggNum h'>1</span><a href="http://www.yixieshi.com/zhichang/17048.html" target="_blank" title="��Ա�����ܼ࣬��Ҫ���׵�8��������">��Ա�����ܼ࣬��Ҫ���׵�8��������</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>2</span><a href="http://www.yixieshi.com/zhichang/17006.html" target="_blank" title="��������ѳɴ�����������">��������ѳɴ�����������</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>3</span><a href="http://www.yixieshi.com/zhichang/16898.html" target="_blank" title="��Щ�꣬�����������������Թ�">��Щ�꣬�����������������Թ�</a></div>
+							</li>
+<li>
+								<div><span class='diggNum'>4</span><a href="http://www.yixieshi.com/zhichang/17032.html" target="_blank" title="ְ���ϣ��������Ͳ�������ʮ��̬��">ְ���ϣ��������Ͳ�������ʮ��̬��</a></div>
+							</li>
+<li>
+								<div><span class='diggNum'>5</span><a href="http://www.yixieshi.com/zhichang/17015.html" target="_blank" title="���׬Ǯ��16����">���׬Ǯ��16����</a></div>
+							</li>
+
+						</ol>
+						<ol id="diggcnt3" class="diggArea tab-pane fade">
+							<li>
+								<div><span class='diggNum h'>1</span><a href="http://www.yixieshi.com/zhichang/16752.html" target="_blank" title="������̫����!���ѧѧ��5������������">������̫����!���ѧѧ��5��������</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>2</span><a href="http://www.yixieshi.com/zhichang/16862.html" target="_blank" title="�ɹ�����ƽӹ�ߵ�ʮ���� �����˼���?">�ɹ�����ƽӹ�ߵ�ʮ���� ���С�</a></div>
+							</li>
+<li>
+								<div><span class='diggNum h'>3</span><a href="http://www.yixieshi.com/zhichang/16855.html" target="_blank" title="��һ�ҹ�˾����ú��ʣ�">��һ�ҹ�˾����ú��ʣ�</a></div>
+							</li>
+<li>
+								<div><span class='diggNum'>4</span><a href="http://www.yixieshi.com/zhichang/16746.html" target="_blank" title="һ��30+���к��ӡ�û�Ƽ������Ĺ�н�ײ�Ĵ�ҵ����">һ��30+���к��ӡ�û�Ƽ������ġ�</a></div>
+							</li>
+<li>
+								<div><span class='diggNum'>5</span><a href="http://www.yixieshi.com/zhichang/16701.html" target="_blank" title="9������ְ���Ҹ棺��80���ٷܶ�5��">9������ְ���Ҹ棺��80���ٷܶ�5��</a></div>
+							</li>
+
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!--���Ž���-->
+            <div class="sidebox" id="lagouData"></div>
+            <!--������Ƹ-->
+			<div class="sidebox">
+				<div class="hd">
+					<h2 class="heading">��������</h2>
+				</div>
+				<ul class="tx-list">
+					<li><a href="http://www.yixieshi.com/zhichang/17113.html" title="�����ÿ���񣢴�ɻ����� ���ֵĹ�����" target="_blank">�����ÿ���񣢴�ɻ����� ���ֵĹ�����</a></li>
+<li><a href="http://www.yixieshi.com/zhichang/17110.html" title="���Ե�ʱ�����̸н�������" target="_blank">���Ե�ʱ�����̸н�������</a></li>
+<li><a href="http://www.yixieshi.com/zhichang/17096.html" title="����ְ��������������û�����ʱ��" target="_blank">����ְ��������������û�����ʱ��</a></li>
+<li><a href="http://www.yixieshi.com/zhichang/17090.html" title="�ڲ�Ʒ�Ĳ�ͬ�׶� ��Ʒ����Ӧ����ʲô��" target="_blank">�ڲ�Ʒ�Ĳ�ͬ�׶� ��Ʒ����Ӧ����ʲô��</a></li>
+<li><a href="http://www.yixieshi.com/zhichang/17064.html" title="ְ����־���ǿư������γ�Ϊ�ȸ����ʦ" target="_blank">ְ����־���ǿư������γ�Ϊ�ȸ��衭</a></li>
+
+				</ul>
+			</div>
+			<div class="sidebox">
+				<div class="hd">
+					<h2 class="heading">���ű�ǩ</h2>
+				</div>
+				<div class="taglist">  <a href='http://www.yixieshi.com/tags/Google.html' target="_blank">Google</a>  <a href='http://www.yixieshi.com/tags/%C3%E6%CA%D4.html' target="_blank">����</a>  <a href='http://www.yixieshi.com/tags/%C9%AB%B2%CA%B4%EE%C5%E4.html' target="_blank">ɫ�ʴ���</a>  <a href='http://www.yixieshi.com/tags/%CE%DE%CF%DF%C2%B7%D3%C9%C6%F7.html' target="_blank">����·����</a>  <a href='http://www.yixieshi.com/tags/%D2%BB%D0%A9%CA%C2%CD%ED%B1%A8.html' target="_blank">һЩ������</a>  <a href='http://www.yixieshi.com/tags/%BB%A5%C1%AA%CD%F8%C9%CC%D2%B5.html' target="_blank">��������ҵ</a>  <a href='http://www.yixieshi.com/tags/%CC%DA%D1%B6%CD%B6%D7%CA%CB%C4%CE%AC%CD%BC%D0%C2.html' target="_blank">��ѶͶ����άͼ��</a>  <a href='http://www.yixieshi.com/tags/%CE%A2%D0%C5%D3%AA%CF%FA.html' target="_blank">΢��Ӫ��</a>  <a href='http://www.yixieshi.com/tags/%B7%DB%CB%BF%BE%AD%BC%C3.html' target="_blank">��˿����</a>  <a href='http://www.yixieshi.com/tags/%C2%ED%BB%AF%CC%DA.html' target="_blank">������</a>  <a href='http://www.yixieshi.com/tags/%C2%ED%D4%C6.html' target="_blank">����</a>  <a href='http://www.yixieshi.com/tags/%C9%A8%BB%C6%B4%F2%B7%C7.html' target="_blank">ɨ�ƴ��</a>  <a href='http://www.yixieshi.com/tags/%CA%D6%BB%FA%D3%CE%CF%B7.html' target="_blank">�ֻ���Ϸ</a>  <a href='http://www.yixieshi.com/tags/%BF%AA%B7%A2%D5%DF.html' target="_blank">������</a>  <a href='http://www.yixieshi.com/tags/%C9%AB%B2%CA.html' target="_blank">ɫ��</a>  <a href='http://www.yixieshi.com/tags/GMIC.html' target="_blank">GMIC</a>  <a href='http://www.yixieshi.com/tags/showgirl.html' target="_blank">showgirl</a>  <a href='http://www.yixieshi.com/tags/%B5%CB%D7%CF%C6%E5.html' target="_blank">������</a>  <a href='http://www.yixieshi.com/tags/%BA%AB%C0%DA.html' target="_blank">����</a>  <a href='http://www.yixieshi.com/tags/%B2%FA%C6%B7%CB%BC%CE%AC.html' target="_blank">��Ʒ˼ά</a>  <a href='http://www.yixieshi.com/tags/%BB%A5%C1%AA%CD%F8.html' target="_blank">������</a>  <a href='http://www.yixieshi.com/tags/%CA%FD%D7%D6.html' target="_blank">����</a>  <a href='http://www.yixieshi.com/tags/%CD%F8%D6%B7.html' target="_blank">��ַ</a>  <a href='http://www.yixieshi.com/tags/%D6%B0%B3%A1.html' target="_blank">ְ��</a>  <a href='http://www.yixieshi.com/tags/%BF%EC%C0%D6%B9%A4%D7%F7.html' target="_blank">���ֹ���</a>  <a href='http://www.yixieshi.com/tags/%D3%CE%CF%B7%BB%AF%CD%C5%B6%D3.html' target="_blank">��Ϸ���Ŷ�</a>  <a href='http://www.yixieshi.com/tags/BAT.html' target="_blank">BAT</a>  <a href='http://www.yixieshi.com/tags/%CB%C4%CE%AC%CD%BC%D0%C2.html' target="_blank">��άͼ��</a>  <a href='http://www.yixieshi.com/tags/%CC%DA%D1%B6.html' target="_blank">��Ѷ</a>  <a href='http://www.yixieshi.com/tags/%C0%AD%C0%EF%A1%A4%C5%E5%C6%E6.html' target="_blank">�������</a> </div>
+			</div>
+			<div id="fixedMain">
+				<div class="sidebox">
+					<div class="hd">
+						<h2 class="heading">�༭�Ƽ�</h2>
+					</div>
+					<ul class="ph-tx-list clearfix">
+						<li>
+							<div class="pic pull-left"><a href="http://www.yixieshi.com/zhichang/16118.html" title="VP���ף��Ӵ򹤹�����ҵ��" target="_blank"><img src="http://www.yixieshi.com/uploads/allimg/140218/S_021P023041A4.jpg" alt="VP���ף��Ӵ򹤹�����ҵ��" /></a></div>
+							<div class="dec">
+								<h3><a href="http://www.yixieshi.com/zhichang/16118.html" title="VP���ף��Ӵ򹤹�����ҵ��" target="_blank">VP���ף��Ӵ򹤹�����ҵ��</a></h3>
+								<p><span>2014-02-18</span><span>36182 �����</span></p>
+							</div>
+						</li>
+<li>
+							<div class="pic pull-left"><a href="http://www.yixieshi.com/zhichang/16478.html" title="����12���뷨��������������" target="_blank"><img src="http://www.yixieshi.com/uploads/allimg/140316/S_0316155K15M8.jpg" alt="����12���뷨��������������" /></a></div>
+							<div class="dec">
+								<h3><a href="http://www.yixieshi.com/zhichang/16478.html" title="����12���뷨��������������" target="_blank">����12���뷨��������������</a></h3>
+								<p><span>2014-03-16</span><span>7221 �����</span></p>
+							</div>
+						</li>
+<li>
+							<div class="pic pull-left"><a href="http://www.yixieshi.com/zhichang/16555.html" title="��Щ�����ϰ����������������ģ�����������ǿ�����룡��" target="_blank"><img src="http://www.yixieshi.com/uploads/allimg/140324/1_03240151339551.jpg" alt="��Щ�����ϰ����������������ģ�����������ǿ�����룡��" /></a></div>
+							<div class="dec">
+								<h3><a href="http://www.yixieshi.com/zhichang/16555.html" title="��Щ�����ϰ����������������ģ�����������ǿ�����룡��" target="_blank">��Щ�����ϰ����������������ģ�����������ǿ�����롭</a></h3>
+								<p><span>2014-03-24</span><span>32676 �����</span></p>
+							</div>
+						</li>
+<li>
+							<div class="pic pull-left"><a href="http://www.yixieshi.com/zhichang/16676.html" title="���Ƽ���������������ڵĹ�����5������������ʲô?" target="_blank"><img src="http://www.yixieshi.com/uploads/allimg/140403/83-14040322163GF-lp.png" alt="���Ƽ���������������ڵĹ�����5������������ʲô?" /></a></div>
+							<div class="dec">
+								<h3><a href="http://www.yixieshi.com/zhichang/16676.html" title="���Ƽ���������������ڵĹ�����5������������ʲô?" target="_blank">���Ƽ���������������ڵĹ�����5������������ʲô?</a></h3>
+								<p><span>2014-04-03</span><span>18120 �����</span></p>
+							</div>
+						</li>
+<li>
+							<div class="pic pull-left"><a href="http://www.yixieshi.com/zhichang/16519.html" title="������Ա���Ҹ桪���ܻ�Ǯ�ģ��Ͳ�Ҫ��ʱ��" target="_blank"><img src="http://www.yixieshi.com/uploads/allimg/140320/1_0320004FH5S.jpg" alt="������Ա���Ҹ桪���ܻ�Ǯ�ģ��Ͳ�Ҫ��ʱ��" /></a></div>
+							<div class="dec">
+								<h3><a href="http://www.yixieshi.com/zhichang/16519.html" title="������Ա���Ҹ桪���ܻ�Ǯ�ģ��Ͳ�Ҫ��ʱ��" target="_blank">������Ա���Ҹ桪���ܻ�Ǯ�ģ��Ͳ�Ҫ��ʱ��</a></h3>
+								<p><span>2014-03-20</span><span>6775 �����</span></p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+				<div class="sidebox">
+	<div class="hd">
+		<h2 class="heading">������������ע����</h2>
+	</div>
+	<div class="sideShare">
+		<ul>
+			<li> <a href="http://e.weibo.com/yixieshi" target="_blank"> <span class="icons sina-share"></span> <span class="title">����΢��</span> <span class="count">����50������˿��ע����</span> </a> </li>
+			<li> <span class="icons tencent-share"></span> <a href="http://t.qq.com/yixieshi" target="_blank"> <span class="title">��Ѷ΢��</span> <span class="count">����2������˿��������</span> </a> </li>
+			<li> <span class="icons rss-share"></span> <a href="http://feed.yixieshi.com/" target="_blank"><span class="title">RSS����</span> <span class="count">ȫ���������ʹ�ø����Ķ�������</span> </a> </li>
+			<li> <span class="icons email-share"></span> <a href="http://list.qq.com/cgi-bin/qf_invite?id=8060c2cdd1cc4596df65916e01e77feae8d91e151386ef49" target="_blank"><span class="title">���䶩��</span> <span class="count">ÿ�����Ų�Ʒ�������͵�����ǰ</span> </a> </li>
+		</ul>
+	</div>
+</div>
+</div>
+		</div>
+		<!--span4End--> 
 		
-<!--done-->
-Copyright ©2013 fancing
-	</div><!--end: footer -->
-</div><!--end: home 自定义的最大容器 -->
-<script type="text/javascript" src="http://common.cnblogs.com/script/google-analytics.js"></script>
-
-
-</body></html>
+	</div>
+	<div class="g960-90"><script type="text/javascript">BAIDU_CLB_fillSlot("860424");</script></div>
+</div>
+<!--�������--> 
+<!--�ؼ���--> 
+<div class="content clearfix">
+	<div class="quickTag">
+		<div class="foot-tag">
+			<div class="hd">
+				<h3 class="heading">����������</h3>
+			</div>
+			<div class="tag-cloud"><a href="http://www.yixieshi.com/tags/%D2%C6%B6%AF%BB%A5%C1%AA%CD%F8.html">�ƶ�������</a> <a href="http://www.yixieshi.com/tags/%D6%A7%B8%B6%B1%A6.html">֧����</a> <a href="http://www.yixieshi.com/tags/360.html">360</a> <a href="http://www.yixieshi.com/tags/%CC%DA%D1%B6.html">��Ѷ</a> <a href="http://www.yixieshi.com/tags/%B0%D9%B6%C8.html">�ٶ�</a> <a href="http://www.yixieshi.com/tags/%C6%BB%B9%FB.html">ƻ��</a></div>
+		</div>
+		<div class="foot-tag">
+			<div class="hd">
+				<h3 class="heading">�������</h3>
+			</div>
+			<div class="tag-cloud"><a href="http://www.yixieshi.com/tags/%D3%C3%BB%A7%CC%E5%D1%E9.html">�û�����</a> <a href="http://www.yixieshi.com/tags/%B2%FA%C6%B7%C9%E8%BC%C6.html">��Ʒ���</a> <a href="http://www.yixieshi.com/tags/%BD%BB%BB%A5%C9%E8%BC%C6.html">�������</a> <a href="http://www.yixieshi.com/tags/%CA%D6%BB%FA%B2%FA%C6%B7.html">�ֻ���Ʒ</a> <a href="http://www.yixieshi.com/tags/%BD%E7%C3%E6%C9%E8%BC%C6.html">�������</a></div>
+		</div>
+		<div class="foot-tag">
+			<div class="hd">
+				<h3 class="heading">��Ʒ��Ӫ</h3>
+			</div>
+			<div class="tag-cloud"><a href="http://www.yixieshi.com/tags/%D0%E8%C7%F3%B7%D6%CE%F6.html">�������</a> <a href="http://www.yixieshi.com/tags/%D3%C3%BB%A7%D1%D0%BE%BF.html">�û��о�</a> <a href="http://www.yixieshi.com/tags/%B2%FA%C6%B7%D3%AA%CF%FA.html">��ƷӪ��</a> <a href="http://www.yixieshi.com/tags/%B2%FA%C6%B7%B9%DC%C0%ED.html">��Ʒ����</a> <a href="http://www.yixieshi.com/tags/%CE%A2%B2%A9%D3%AA%CF%FA.html">΢��Ӫ��</a></div>
+		</div>
+		<div class="foot-tag">
+			<div class="hd">
+				<h3 class="heading">��������</h3>
+			</div>
+			<div class="tag-cloud"><a href="http://www.yixieshi.com/tags/%BE%A9%B6%AB%C9%CC%B3%C7.html">�����̳�</a> <a href="http://www.yixieshi.com/tags/%CD%C5%B9%BA.html">�Ź�</a> <a href="http://www.yixieshi.com/tags/%CC%D4%B1%A6.html">�Ա�</a> <a href="http://www.yixieshi.com/tags/%D7%AA%BB%AF%C2%CA.html">ת����</a> <a href="http://www.yixieshi.com/tags/%B5%E7%D7%D3%C9%CC%CE%F1.html">��������</a></div>
+		</div>
+	</div>
+</div> 
+<!--�ؼ��ֽ���--> 
+<!-- Baidu Button BEGIN --> 
+<script>
+window._bd_share_config={common:{bdSnsKey:{"tsina":"572572056","tqq":"801065493","t163":"KHChhBRLNj1nP8kG","tsohu":"PqgKVZS3X6CpdjMH"},bdText:"������ڹ�����Ѱ����Ȥ ���ֹ���С���ԡ�������һ�� �����Լ� �����ǳɹ��Ļ�ʯ���ʵ���ȷ�����������������κζ�������ʹ�˻��档 ;������������;ȫ���Ը�;����ѧϰ�� Ҫ�� 1����Զ��΢Ц�����Ĺ�����顢�쵼�Ͳ���; 2������������Ҫ��죬��̸�̺�Ц��; 3�����ء�",bdDesc:"��һ�� �����Լ� �����ǳɹ��Ļ�ʯ���ʵ���ȷ�����������������κζ�������ʹ�˻��档 ;������������;ȫ��",bdUrl:"http://www.yixieshi.com/zhichang/1107.html",bdMini:2,bdMiniList:false,bdStyle:0,},share:[{"bdSize":32}],};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=86835285.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!-- Baidu Button END --> 
+<div class="footer row-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<h3 class="heading">��������һЩ��</h3>
+				<ul class="list">
+					<li><a href="http://www.yixieshi.com/about/aboutus.html" target="_blank">��������</a></li>
+					<li><a href="http://www.yixieshi.com/about/partner.html" target="_blank">������</a></li>
+					<li><a href="http://www.yixieshi.com/about/mianze.html" target="_blank">��������</a></li>
+					<li><a href="http://www.yixieshi.com/plus/flink.php" target="_blank">��������</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3 class="heading">����/Ͷ��</h3>
+				<ul class="list">
+					<li><a href="http://feed.yixieshi.com/" target="_blank">Rss����</a></li>
+					<li><a href="http://list.qq.com/cgi-bin/qf_invite?id=8060c2cdd1cc4596df65916e01e77feae8d91e151386ef49" target="_blank">�ʼ�����</a></li>
+					<li><a href="http://mail.qq.com/cgi-bin/bookcol?colid=20015" target="_blank">QQ���䶩��</a></li>
+					<li><a href="http://www.yixieshi.com/about/tougao.html" target="_blank" style="color:#FF0000;">Ͷ��</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3 class="heading">��ע����</h3>
+				<ul class="follow">
+					<li><a href="http://e.weibo.com/yixieshi" title="����΢��" class="f-weibo" target="_blank"><i class="icons weibo-icon"></i>����΢��</a></li>
+					<li><a href="http://t.qq.com/yixieshi" title="��Ѷ΢��" class="f-TCweibo" target="_blank"><i class="icons TCweibo-icon"></i>��Ѷ΢��</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3 class="heading">�ͻ���</h3>
+				<ul class="client">
+					<li><a href="http://itunes.apple.com/cn/app/id641946759?mt=8" title="����IOS�ֻ��ͻ���" class="icons ios-icon" target="_blank">IOS</a></li>
+					<li><a href="http://zhushou.360.cn/detail/index/soft_id/298244" title="����Andriod�ֻ��ͻ���" class="icons andriod-icon" target="_blank">Andriod</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix text-center copyright">
+			<p>Copyright &copy; 2009-2013 YiXieShi. ��������һЩ�� ��Ȩ����</p>
+			<p><a href="http://www.miitbeian.gov.cn" target="_blank">��ICP��09139612��</a></p>
+		</div>
+	</div>
+</div>
+<div id="totop" > <a class="icons gotop" href="javascript:;">�ص�����</a>
+	<div class="show-weixin">
+		<div class="icons max-weixin-icon-gary"></div>
+		<div class="show-main"><img src="/images/weixin.png" width="250" height="240" alt="describe"/></div>
+	</div>
+</div>
+<script src="http://www.yixieshi.com/plus/count.php?view=yes&aid=1107&mid=12" type='text/javascript' language="javascript"></script>
+<script type="text/javascript" src="/min/?b=templets/yixieshi/js&amp;f=bootstrap.min.js,jquery.bmSlide.0.1.7.js,jquery.fixbox.js"></script>
+<!--[if lte IE 6]>
+<script type="text/javascript" src="http://www.yixieshi.com/templets/yixieshi/js/bootstrap-ie.js"></script>
+<![endif]-->
+<!--������Ƹ����--> 
+<script type="text/javascript">
+function getLength(str){var len=str.length;var reLen=0;for(var i=0;i<len;i++){if(str.charCodeAt(i)<27||str.charCodeAt(i)>126){reLen+=2}else{reLen++}};return reLen};function success_jsonpCallback(data){var html='';var pos='';html+='<div class="hd"><h2 class="heading">����ְλ</h2></div><ul class="tx-list">';jQuery.each(data,function(k,v){if(k<5){pos='��'+v.city+'��'+v.positionName+'('+v.salary+')-'+v.companyName;var len=getLength(pos);if(len>22){pos=pos.substring(0,22)+'...'};html+='<li><a href="'+v.posiitonDetailUrl+'" target="_blank" title="��'+v.city+'��'+v.positionName+'('+v.salary+') - '+v.companyName+'">'+pos+'</a></li>'}});html+='</ul>';jQuery('#lagouData').html(html)};jQuery.ajaxSetup({scriptCharset:"utf-8",contentType:"application/json; charset=utf-8"});function getLagouData(){jQuery.ajax({async:false,url:"http://www.lagou.com/join/listYixieshi",type:"GET",dataType:"jsonp",jsonpCallback:'success_jsonpCallback',contentType:"application/jsonp; charset=utf-8",success:function(data){success_jsonpCallback(data)}})};getLagouData();
+</script>
+<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" charset="utf-8"></script> 
+<script type="text/javascript">
+//��������
+$("#fixedMain").fixbox({distanceToBottom:530,distanceToTop:10});
+$(document).ready(function(){
+console.log($(document).height());
+});
+</script> 
+<!-- totop BEGIN --> 
+<script type="text/javascript">
+	$(window).scroll(function () {
+        var dt = $(document).scrollTop();
+        var wt = $(window).height();
+        if (dt <= 0) {
+            $("#totop").hide();
+            return;
+        }
+        $("#totop").show();
+        if ($.browser.msie && $.browser.version == 6.0) {//IE6���ض���
+            $("#totop").css("top", wt + dt - 110 + "px");
+        }
+    });
+    $("#totop").click(function () { $("html,body").animate({ scrollTop: 0 }, 200) });
+</script> 
+<div style="display:none">
+<script src="http://s93.cnzz.com/stat.php?id=2002547&web_id=2002547" language="JavaScript"></script><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F56cf68a081c003605dc19f09401a2f2c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+</body>
+</html>

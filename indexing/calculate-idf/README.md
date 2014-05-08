@@ -11,8 +11,8 @@ log10 表示对得到的值取以10为底的对数。
 ./idf.conf 配置文件： 
 
 {
-	"ExtractWebpagePath": "E:/SearchEngine/extract/webpage/",
-	"ExtractUrlDataPath": "E:/SearchEngine/extract/extracturldata.db"
+	"ExtractWebpagePath": "D:/SearchEngine/extract/webpage/",
+	"ExtractUrlDataPath": "D:/SearchEngine/extract/extracturldata.db"
 }
 
 ExtractWebpagePath 中的文件名以 _body.txt 结尾的文档是抽取出来的网页正文，可以看做成一个语料库。
